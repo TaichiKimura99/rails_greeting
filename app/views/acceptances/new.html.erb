@@ -1,0 +1,25 @@
+<h1>規約承諾</h1>
+<p>本気役所に同意する場合は、「yes」を入力して承諾ボタンを押してください。</p>
+<!-- ここからformタグを作成 -->
+<!-- コントローラーから受け取った@acceptanceオブジェクトを使用する -->
+<%= form_with(model: @acceptance, local: true) do |form| %>
+    <!-- バリデーションにエラーがある場合 -->
+    <% if @acceptance.errors.any? %>
+        <div id ="error_explanation">
+            <h2><%= pluralize(@acceptance.errors.count, "error") %> prohibited ~~~</h2>
+            <ul>
+                <!-- エラーメッセージの数分メッセージを出力 -->
+                <% @acceptance.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+    <div class="field">
+        <%= form.label :accepting %>
+        <%= form.text_field :accepting, id: :acceptance_accepting %>
+    </div>
+    <div class="actions">
+        <%=form.submit "承諾" %>
+    </div>
+<% end %>
